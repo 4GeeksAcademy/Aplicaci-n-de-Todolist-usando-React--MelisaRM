@@ -1,24 +1,58 @@
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import React, { useState } from "react";
 
-import { ImageLink } from "./components/ImageLink";
+function TodoList() {
+  const [task, setTask] = useState("");       
+  const [tasks, setTasks] = useState([]);     
 
-export const App = () => {
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      const trimmedTask = task.trim();
+
+      if (trimmedTask === "") {
+        alert("La tarea no puede estar vacía");
+        return;
+      }
+
+      setTasks([...tasks, trimmedTask]); 
+      setTask(""); 
+    }
+  };
+
+  const handleDelete = (indexToRemove) => {
+    setTasks(tasks.filter((_, index) => index !== indexToRemove));
+  };
+
   return (
-    <>
-      <div>
-        <ImageLink src={viteLogo} alt={"Vite logo"} href={"https://vite.dev"} />
-        <ImageLink
-          src={reactLogo}
-          alt={"React logo"}
-          href={"https://react.dev"}
-        />
-      </div>
-      <h1>Vite + React</h1>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="todo-container">
+      <h2>Lista de Tareas</h2>
+
+      <input
+        type="text"
+        placeholder="Añadir nueva tarea"
+        value={task}
+        onChange={(e) => setTask(e.target.value)}  
+        onKeyDown={handleKeyDown}
+      />
+
+      <ul className="task-list">
+        {tasks.length === 0 ? (
+          <li className="no-task">No hay tareas, añadir tareas</li>
+        ) : (
+          tasks.map((item, index) => (
+            <li key={index} className="task-item">
+              {item}
+              <span
+                className="delete-icon"
+                onClick={() => handleDelete(index)}
+              >
+                🗑
+              </span>
+            </li>
+          ))
+        )}
+      </ul>
+    </div>
   );
-};
+}
+
+export default TodoList;

@@ -1,0 +1,49 @@
+.todo-container {
+  width: 400px;
+  margin: 80px auto;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.task-item {
+  padding: 10px;
+  background-color: #f2f2f2;
+  margin-bottom: 10px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.task-item:hover {
+  background-color: #e4e4e4;
+}
+
+.delete-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: none;
+  cursor: pointer;
+}
+
+.task-item:hover .delete-icon {
+  display: inline;
+}
+
+.no-task {
+  color: #888;
+  text-align: center;
+}
